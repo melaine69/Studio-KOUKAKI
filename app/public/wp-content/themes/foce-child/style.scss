@@ -1,0 +1,28 @@
+.banner {
+  opacity: 0;
+  transform: translateY(-40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out, background-position 0.1s linear;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+//Fleur orange tourne infini
+.story__article::after {
+    animation: infinite-rotate 6s linear infinite;
+
+ }
+ @keyframes infinite-rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+ }
+

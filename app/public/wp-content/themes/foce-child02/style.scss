@@ -1,7 +1,0 @@
-.banner {
-  overflow: hidden; // nécessaire pour que l'image ne dépasse pas
-  img {
-    transform: translateY(0); // position initiale
-    transition: transform 0.1s linear; // fluide lors du scroll
-  }
-}
