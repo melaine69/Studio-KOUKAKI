@@ -1,15 +1,30 @@
-.banner {
+@charset "UTF-8";
+/*  banner {
   opacity: 0;
   transform: translateY(-40px);
   transition: opacity 0.8s ease-out, transform 0.8s ease-out, background-position 0.1s linear;
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+position: relative;
+}*/
+.banner {
+  position: relative;
+  overflow: hidden;
 }
 
-.banner.is-visible {
-  opacity: 1;
-  transform: translateY(0);
+.banner video {
+  animation: videoParallax 1s ease;
+}
+
+.logo {
+  position: absolute;
+  animation: logoParallax 1s ease;
 }
 
 .story__article::after {
@@ -24,3 +39,64 @@
     transform: rotate(360deg);
   }
 }
+
+/* Keyframes */
+@keyframes videoParallax {
+  from {
+    transform: translateY(-50px);
+    /* commence légèrement au-dessus */
+  }
+  to {
+    transform: translateY(0);
+    /* revient à sa position normale */
+  }
+}
+
+@keyframes logoParallax {
+  from {
+    transform: translateY(50px);
+    /* commence légèrement en bas */
+  }
+  to {
+    transform: translateY(10px);
+  }
+}
+
+.story_title {
+    display: inline-block; /* comme c'est un span il était en inline de base donc ne bouger pas*/
+  opacity: 0;
+  transform: translateY(50px); /* on le place plus bas au départ */
+  transition: opacity 2s ease-out, transform 2s ease-out;
+}
+
+.story_title.animate {
+  opacity: 1;
+  transform: translateY(0px);
+}
+.word_two {
+    transition-delay: 0.3s;
+}
+.story #place {
+	background-image: url("./assets/Studio_Koukaki-image_place.png");
+    position: relative;
+}
+
+.place_wrap_cloud {
+  filter: blur(15px);
+  right: 0;
+  top: 70px;
+  position: absolute;
+}
+
+.place_cloud {
+  will-change: transform; /* optimisation */
+  transition: none; /* on gère avec JS */
+}
+
+.place_cloud.little {
+  transform: translateX(-200px) translateY(90px);
+}
+
+
+
+
