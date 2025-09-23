@@ -24,4 +24,5 @@ function mytheme_enqueue_scripts() {
         true 
     );
 }
+
 add_action('wp_enqueue_scripts', 'mytheme_enqueue_scripts');

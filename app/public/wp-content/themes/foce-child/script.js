@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // -------- TITRES AVEC INTERSECTION OBSERVER --------
+  // --------- TITRES AVEC INTERSECTION OBSERVER ---------
   function observeAndAnimate(selector, className, threshold = 0.2) {
     const elements = document.querySelectorAll(selector);
     if (!elements.length) return;
@@ -16,46 +16,75 @@ document.addEventListener("DOMContentLoaded", () => {
     elements.forEach(el => observer.observe(el));
   }
 
-  // Applique l’observateur aux titres
   observeAndAnimate(".story_title", "animate");
 
 
-  // -------- NUAGES AVEC DÉPLACEMENT PROGRESSIF --------
-  const clouds = document.querySelectorAll(".place_cloud");
-  const maxShift = 300; // amplitude de déplacement
+  // --------- NUAGES AVEC DÉPLACEMENT PROGRESSIF ---------
+  function initClouds() {
+    const clouds = document.querySelectorAll(".place_cloud");
+    const maxShift = 800; // amplitude (augmente pour un effet plus marqué)
 
-  function updateClouds() {
-    const scrollY = window.scrollY;
-    const windowHeight = window.innerHeight;
-    const docHeight = document.body.scrollHeight - windowHeight;
+    function updateClouds() {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const docHeight = document.body.scrollHeight - windowHeight;
+      const scrollRatio = docHeight > 0 ? scrollY / docHeight : 0;
 
-    // ratio du scroll entre 0 et 1
-    const scrollRatio = scrollY / docHeight;
+      clouds.forEach(cloud => {
+        const baseX = parseInt(cloud.dataset.baseX || 0, 10);
+        const shift = -scrollRatio * maxShift;
+        cloud.style.transform = `translateX(${baseX + shift}px)`;
+      });
+    }
 
+    // Initialiser la position de base
     clouds.forEach(cloud => {
-      const baseX = parseInt(cloud.dataset.baseX || 0, 10);
-      const shift = -scrollRatio * maxShift;
+      const matrix = window.getComputedStyle(cloud).transform;
 
-      cloud.style.transform = `translateX(${baseX + shift}px)`; 
+      if (matrix !== "none") {
+        const values = matrix.match(/matrix.*\((.+)\)/)[1].split(", ");
+        const translateX = parseFloat(values[4]);
+        cloud.dataset.baseX = translateX || 0;
+      } else {
+        cloud.dataset.baseX = 0;
+      }
     });
+
+    window.addEventListener("scroll", updateClouds);
+    updateClouds(); // première mise à jour
   }
 
-  // Initialiser la position de base
-  clouds.forEach(cloud => {
-    const matrix = window.getComputedStyle(cloud).transform;
+  initClouds();
 
-    if (matrix !== "none") {
-      const values = matrix.match(/matrix.*\((.+)\)/)[1].split(", ");
-      const translateX = parseFloat(values[4]);
-      cloud.dataset.baseX = translateX || 0;
-    } else {
-      cloud.dataset.baseX = 0;
-    }
+
+  // --------- CARROUSEL PERSONNAGES (SWIPER) ---------
+  new Swiper('.characters-carousel', {
+    effect: 'coverflow',
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: 'auto',
+    spaceBetween: 30,
+    coverflowEffect: {
+      rotate: 50,
+      stretch: 0,
+      depth: 100,
+      modifier: 1,
+      slideShadows: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
   });
-
-  window.addEventListener("scroll", updateClouds);
-  updateClouds();
 });
+
+
+
+
 
 
 /*function animateOnScroll() {

@@ -1,7 +1,9 @@
 <?php
 
 get_header();
+
 ?>
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
     <main id="primary" class="site-main">
         <section class="banner">
@@ -25,36 +27,11 @@ get_header();
             );
             $characters_query = new WP_Query($args);
             ?>
-            <article id="characters">
-                <div class="main-character">
-                    <h3><span class="story_title">Les</span> <span class="story_title word_two">personnages</span></h3>
-                    <?php
-                    $main_character = $characters_query->posts[0];
-                    echo '<figure>';
-                    echo get_the_post_thumbnail( $main_character->ID, 'full' );
-                    echo '<figcaption>'. $main_character->post_title . '</figcaption>';
-                    echo '</figure>';
-                    $characters_query->next_post();
-                    ?>
-                </div>
-                <div class="other-characters">
-                    <?php
-                    while ( $characters_query->have_posts() ) {
-                        $characters_query->the_post();
-                        echo '<figure>';
-                        echo get_the_post_thumbnail( get_the_ID(), 'full' );
-                        echo '<figcaption>';
-                        the_title();
-                        echo'</figcaption>';
-                        echo '</figure>';
-                    }
-                    ?>
-                </div>
-            </article>
+       <?php include get_stylesheet_directory() . '/section-characters.php'; ?>
             <article id="place">
                 <div class="place_wrap_cloud">
                    <img class="place_cloud" src="<?php echo get_stylesheet_directory_uri(); ?>/assets/big_cloud.png" alt="grand nuage" />
-                    <img class="place_cloud little" src="<?php echo get_stylesheet_directory_uri(); ?>/assets/little_cloud.png" alt="grand nuage" />
+                    <img class="place_cloud" src="<?php echo get_stylesheet_directory_uri(); ?>/assets/little_cloud.png" alt="grand nuage" />
                 </div>
                 <div>
                     <h3><span class="story_title">Le</span> <span class="story_title word_two">lieu</span></h3>
@@ -73,6 +50,7 @@ get_header();
             </div>
             </section>
     </main><!-- #main -->
-
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <?php
 get_footer();
+
