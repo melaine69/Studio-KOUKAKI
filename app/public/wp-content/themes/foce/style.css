@@ -787,8 +787,8 @@ textarea {
 
 .story #characters {
 	margin: 6em;
-	display: flex;
-	text-align: center;
+	/*display: flex;
+	text-align: center;*/
 }
 
 .story #characters h3 {

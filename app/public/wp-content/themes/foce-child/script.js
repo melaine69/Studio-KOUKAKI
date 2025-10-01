@@ -58,8 +58,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // --------- CARROUSEL PERSONNAGES (SWIPER) ---------
-  new Swiper('.characters-carousel', {
+  /*new Swiper('.characters-carousel', {
     effect: 'coverflow',
+    loop: true,
     grabCursor: true,
     centeredSlides: true,
     slidesPerView: 'auto',
@@ -75,12 +76,18 @@ document.addEventListener("DOMContentLoaded", () => {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     },
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-    },
-  });
+  });*/
+
+ let swiper = new Swiper(".characters-carousel", {
+  loop: true,
+  grabCursor: true,
+  centeredSlides: false,
+  slidesPerView: "auto",
+  spaceBetween: 30,
 });
+observeAndAnimate(".logo", "loop-motion");
+});
+
 
 
 

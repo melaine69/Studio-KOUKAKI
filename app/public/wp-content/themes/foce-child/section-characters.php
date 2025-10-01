@@ -1,11 +1,13 @@
 <?php if ( isset($characters_query) && $characters_query->have_posts() ) : ?>
-<section id="characters" class="characters-carousel swiper">
+<section id="characters">
+   <div class="characters-header">
   <h3>
     <span class="story_title">Les</span>
     <span class="story_title word_two">personnages</span>
   </h3>
-
-  <div class="swiper-wrapper">
+</div>
+  <div class="characters-carousel swiper">
+    <div class="swiper-wrapper">
     <?php
     while ( $characters_query->have_posts() ) {
       $characters_query->the_post();
@@ -22,10 +24,7 @@
       </div>
     <?php } ?>
   </div>
-
-  <div class="swiper-pagination"></div>
-  <div class="swiper-button-prev"></div>
-  <div class="swiper-button-next"></div>
+  </div>
 </section>
 <?php wp_reset_postdata(); ?>
 <?php endif; ?>
