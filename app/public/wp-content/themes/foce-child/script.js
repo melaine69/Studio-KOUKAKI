@@ -1,4 +1,5 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', function() {
+
   // --------- TITRES AVEC INTERSECTION OBSERVER ---------
   function observeAndAnimate(selector, className, threshold = 0.2) {
     const elements = document.querySelectorAll(selector);
@@ -8,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add(className);
-          obs.unobserve(entry.target); // stoppe après l’animation
+          obs.unobserve(entry.target);
         }
       });
     }, { threshold });
@@ -18,93 +19,56 @@ document.addEventListener("DOMContentLoaded", () => {
 
   observeAndAnimate(".story_title", "animate");
 
-
   // --------- NUAGES AVEC DÉPLACEMENT PROGRESSIF ---------
   function initClouds() {
-    const clouds = document.querySelectorAll(".place_cloud");
-    const maxShift = 800; // amplitude (augmente pour un effet plus marqué)
+  const clouds = document.querySelectorAll(".place_cloud");
+  const maxShift = -900; // amplitude
 
-    function updateClouds() {
-      const scrollY = window.scrollY;
-      const windowHeight = window.innerHeight;
-      const docHeight = document.body.scrollHeight - windowHeight;
-      const scrollRatio = docHeight > 0 ? scrollY / docHeight : 0;
+  // Position de base X
+  clouds.forEach(cloud => {
+    cloud.dataset.baseX = 0;
+  });
 
-      clouds.forEach(cloud => {
-        const baseX = parseInt(cloud.dataset.baseX || 0, 10);
-        const shift = -scrollRatio * maxShift;
-        cloud.style.transform = `translateX(${baseX + shift}px)`;
-      });
-    }
+  function updateClouds() {
+    const scrollY = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const docHeight = document.body.scrollHeight - windowHeight;
+    const scrollRatio = docHeight > 0 ? scrollY / docHeight : 0;
 
-    // Initialiser la position de base
     clouds.forEach(cloud => {
-      const matrix = window.getComputedStyle(cloud).transform;
+      const baseX = parseFloat(cloud.dataset.baseX) || 0;
+      const shift = -scrollRatio * maxShift;
 
-      if (matrix !== "none") {
-        const values = matrix.match(/matrix.*\((.+)\)/)[1].split(", ");
-        const translateX = parseFloat(values[4]);
-        cloud.dataset.baseX = translateX || 0;
+      // Si le nuage a la classe "little", on ajoute plus de hauteur
+      if (cloud.classList.contains("little")) {
+        cloud.style.transform = `translateX(${baseX + shift}px) translateY(100px)`;
       } else {
-        cloud.dataset.baseX = 0;
+        cloud.style.transform = `translateX(${baseX + shift}px)`;
       }
     });
-
-    window.addEventListener("scroll", updateClouds);
-    updateClouds(); // première mise à jour
   }
 
-  initClouds();
+  window.addEventListener("scroll", updateClouds);
+  updateClouds();
+}
+
+initClouds();
 
 
   // --------- CARROUSEL PERSONNAGES (SWIPER) ---------
-  /*new Swiper('.characters-carousel', {
-    effect: 'coverflow',
+  let swiper = new Swiper(".characters-carousel", {
+    effect: "coverflow",
+    /*rewind: true,*/
     loop: true,
     grabCursor: true,
-    centeredSlides: true,
-    slidesPerView: 'auto',
-    spaceBetween: 30,
+    centeredSlides: false,
+    slidesPerView: 3,
     coverflowEffect: {
-      rotate: 50,
-      stretch: 0,
-      depth: 100,
-      modifier: 1,
-      slideShadows: true,
+      slideShadows: false,
+      rotate: 0,
     },
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-  });*/
-
- let swiper = new Swiper(".characters-carousel", {
-  loop: true,
-  grabCursor: true,
-  centeredSlides: false,
-  slidesPerView: "auto",
-  spaceBetween: 30,
-});
-observeAndAnimate(".logo", "loop-motion");
-});
-
-
-
-
-
-
-
-/*function animateOnScroll() {
-  const titles = document.querySelectorAll('h2');
-
-  titles.forEach(title => {
-    const rect = title.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 100) {
-      title.classList.add('visible');
-    }
   });
-}
 
-window.addEventListener('scroll', animateOnScroll);
-window.addEventListener('load', animateOnScroll);*/
+  observeAndAnimate(".logo", "loop-motion");
 
+}); // fin DOMContentLoaded
