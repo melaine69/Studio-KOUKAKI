@@ -1,6 +1,122 @@
+@media (max-width: 768px) {
+  .main-navigation.toggled ul {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #FFF5E9;
+  }
+  .main-navigation.toggled ul::before {
+    content: "";
+    display: block;
+    width: 154px;
+    height: 95px;
+    background-image: url('./assets/logo-header-mobile.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0 auto;
+  }
+
+  .main-navigation.toggled::before {
+    content: "";
+    position: absolute;
+    top: 50px;
+    width: 154px;
+    height: 95px;
+    background-image: url('./assets/Orchid.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  .main-navigation button {
+    margin-right: 0px;
+  }
+  .main-navigation.toggled .menu-toggle .line {
+    transition: transform 0.6s ease-in-out;
+  }
+  .main-navigation.toggled .menu-toggle .line:first-child {
+    transform: translate(-5px, 5px) rotate(45deg);
+  }
+   .main-navigation.toggled ul li:first-child::before {
+    content: "";
+    position: absolute;
+    left: -110px;
+    width: 109px;
+    height: 65px;
+    transform: none;
+    background-image: url('./assets/blue-cat.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+   .main-navigation.toggled ul li:first-child::after {
+    content: "";
+    position: absolute;
+    top: -10px;
+    right: -170px;
+    width: 150px;
+    height: 100px;
+    transform: none;
+    background-image: url('./assets/sunflower.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+    .main-navigation.toggled ul li:nth-of-type(2)::after {
+    content: "";
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    right: -110px;
+    background-image: url('./assets/Random-Flower.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+    .main-navigation.toggled ul li:nth-of-type(3)::after {
+    content: "";
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    left: 0;
+    background-image: url('./assets/Flower-orange.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  .main-navigation.toggled .menu-toggle .line:nth-of-type(2) {
+    opacity: 0;
+  }
+
+  .main-navigation.toggled .menu-toggle .line:nth-of-type(3) {
+    transform: translate(-5px, -5px) rotate(-45deg);
+  }
+
+  .main-navigation ul li a {
+    font-size: 32px;
+    text-align: center;
+  }
+
+  .main-navigation ul li a:hover {
+    text-shadow: #DC8433 1px 1px 10px;
+  }
+
+  .main-navigation.toggled ul::after {
+    content: "STUDIO KOUKAKI";
+    display: block;
+    font-size: 1rem;
+    font-weight: lighter;
+    text-align: center;
+  }
+
+}
+
 .banner {
   position: relative;
   overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+  .banner,
+  .banner video {
+    height: 360px !important;
+  }
 }
 
 .banner video {
@@ -11,26 +127,57 @@
   position: absolute;
   animation: logoParallax 1s ease;
 }
+
 .logo.loop-motion {
-  animation: logoParallax 1s ease, loopMotion 3s ease-in-out 1s infinite;
+  animation: logoParallax 1s ease, loopMotion 4s ease-in-out 1s infinite;
 }
 
 /* Animation de mouvement circulaire */
 @keyframes loopMotion {
-  0%   { transform: translate(0px, 0px); }
-  25%  { transform: translate(10px, -5px); }
-  50%  { transform: translate(0px, -10px); }
-  75%  { transform: translate(-10px, -5px); }
-  100% { transform: translate(0px, 0px); }
+  0% {
+    transform: translate(0px, 0px);
+  }
+
+  25% {
+    transform: translate(10px, 0px);
+  }
+
+  /* droite */
+  50% {
+    transform: translate(0px, 10px);
+  }
+
+  /* bas */
+  75% {
+    transform: translate(-10px, 0px);
+  }
+
+  /* gauche */
+  100% {
+    transform: translate(0px, 0px);
+  }
+
+  /* retour en haut */
 }
-.story__article::after, .story h2::after, #studio h2::after, .site-footer::before {
+
+.story__article::after,
+.story h2::after,
+#story h2::after,
+.site-footer::before {
   animation: infinite-rotate 6s linear infinite;
+}
+
+@media (max-width: 1024px) {
+  .story_title {
+    font-size: 30px;
+  }
 }
 
 @keyframes infinite-rotate {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -42,6 +189,7 @@
     transform: translateY(-50px);
     /* commence légèrement au-dessus */
   }
+
   to {
     transform: translateY(0);
     /* revient à sa position normale */
@@ -53,18 +201,19 @@
     transform: translateY(50px);
     /* commence légèrement en bas */
   }
+
   to {
     transform: translateY(10px);
   }
 }
 
 .story_title {
-    display: inline-block;
-      /* comme c'est un span il était en inline de base donc ne bouger pas*/
-      opacity: 0;
-      transform: translateY(50px);
-      /* on le place plus bas au départ */
-      transition: opacity 2s ease-out, transform 2s ease-out;
+  display: inline-block;
+  /* comme c'est un span il était en inline de base donc ne bouger pas*/
+  opacity: 0;
+  transform: translateY(50px);
+  /* on le place plus bas au départ */
+  transition: opacity 2s ease-out, transform 2s ease-out;
 }
 
 .story_title.animate {
@@ -73,40 +222,52 @@
 }
 
 .word_two {
-    transition-delay: 0.3s;
-}
-#characters {
-    position: relative;
-    z-index: 2;
-    padding-top: 60px;
-    margin-left: 20px;
-}
-.characters-header h3 {
-  display: inline-block;
-  background-image: url("./assets/orange_characters_bg.png");
-}
-.swiper-3d {
-  perspective: none !important;
+  transition-delay: 0.3s;
 }
 
-.characters-carousel .swiper{
+#characters {
+  position: relative;
+  z-index: 2;
+  padding-top: 60px;
+}
+
+@media (max-width: 768px) {
+  #characters {
+    padding-top: 0px;
+  }
+}
+
+.characters-header h3 {
+  display: inline-block !important;
+  background-image: url("./assets/orange_characters_bg.png");
+}
+
+@media (max-width: 768px) {
+
+  .characters-header h3,
+  #studio h2 {
+    display: flex!important;
+    flex-wrap: nowrap;
+    gap: 10px;
+  }
+}
+
+.characters-carousel .swiper {
   max-width: 100%;
   width: 100%;
   position: relative;
-}
-
-.swiper-wrapper {
-  margin-left: 20px;
-  margin-right: 20px;
 }
 
 #characters figure {
   text-align: center;
 }
 
+/*.swiper-slide {
+  width: 30%!important;
+}*/
+
 #characters img {
-  width: 360px;
-  height: 360px;
+  width: 100%;
 }
 
 #characters figcaption {
@@ -114,11 +275,14 @@
   font-weight: 600;
 
 }
+
 #place {
-	background-image: url("./assets/Studio_Koukaki-image_place.png");
+  background-image: url("./assets/Studio_Koukaki-image_place.png");
+  display: flex;
+  width: 100%;
+  min-height: 699px;
+  background-size: cover;
   position: relative;
-  z-index: 1;
-  padding: 100px 20px 20px;
 }
 
 .place_wrap_cloud {
@@ -128,7 +292,8 @@
 
 .place_cloud {
   filter: blur(15px);
-  will-change: transform; /* optimisation */
+  will-change: transform;
+  /* optimisation */
   transition: transform 0.1s ease-out;
 }
 
@@ -136,11 +301,35 @@
   filter: blur(20px);
 }
 
+#place>div {
+  max-width: 580px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 6em;
+}
+
+@media (max-width: 768px) {
+  #place>div {
+    margin-left: 0px;
+    padding-right: 16px;
+  }
+}
+
 .title_place {
-  margin-top: 3em;
-  margin-left: 64px;
-  display: inline-block;
   background-image: url("./assets/orange_place_bg.png");
+  margin-bottom: -1em;
+}
+
+@media (max-width: 1024px) {
+  .title_place {
+    margin-top: 116px;
+  }
+}
+
+#place>div p {
+  padding-left: 5em;
 }
 
 .wrap-oscars {
@@ -160,17 +349,31 @@
   color: #FFF5E9;
   text-shadow: #DC8433 1px 1px 10px;
   margin-top: 2em;
-  padding: 2em;
+  padding: 2.5em;
   font-size: 3rem;
-	font-family: "Quicksand", sans-serif;
+  font-family: "Quicksand", sans-serif;
   font-weight: 700;
-	background-repeat: no-repeat;
-	background-size: contain;
+  line-height: 1.2;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
+@media (max-width: 1024px) {
+  .row_oscars p {
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+    background-size: 100% 100%;
+  }
 
+  .row_oscars img {
+    width: 30%;
+  }
+}
 
-
-
+@media (max-width: 768px) {
+  #studio {
+    margin-top: 0px;
+  }
+}
 
 

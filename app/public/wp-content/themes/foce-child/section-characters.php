@@ -16,7 +16,7 @@
             <figure>
               <?php
               if (has_post_thumbnail()) {
-                the_post_thumbnail('full');
+                the_post_thumbnail('thumbnail');
               }
               ?>
               <figcaption><?php the_title(); ?></figcaption>
@@ -25,6 +25,6 @@
         <?php } ?>
       </div>
     </div>
-  </section>
+</section>
   <?php wp_reset_postdata(); ?>
 <?php endif; ?>

@@ -5,7 +5,7 @@ get_header();
 ?>
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
-<main id="primary" class="site-main">
+<section id="primary" class="site-main">
     <section class="banner">
         <video autoplay muted loop playsinline class="video-background">
             <source src="<?php echo get_stylesheet_directory_uri(); ?>/assets/video-header.mp4" type="video/mp4">
@@ -18,9 +18,8 @@ get_header();
         <h2><span class="story_title">L'histoire</span></h2>
         <article class="story__article">
             <p><?php echo get_theme_mod('story'); ?></p>
-        </article>
-    </section>
-    <!--Les personnages-->
+        </article></section>
+    <!--Les personnages section autre fichier-->
     <?php
     $args = array(
         'post_type' => 'characters',
@@ -33,7 +32,7 @@ get_header();
     ?>
     <?php include get_stylesheet_directory() . '/section-characters.php'; ?>
 
-    <section id="place">
+    <div id="place">
         <div class="place_wrap_cloud">
             <img class="place_cloud" src="<?php echo get_stylesheet_directory_uri(); ?>/assets/big_cloud.png"
                 alt="grand nuage" />
@@ -45,7 +44,7 @@ get_header();
             </h3>
             <p><?php echo get_theme_mod('place'); ?></p>
         </div>
-    </section>
+    </div>
 
     <section id="studio">
         <h2><span class="story_title">Studio</span> <span class="story_title word_two">Koukaki</span></h2>

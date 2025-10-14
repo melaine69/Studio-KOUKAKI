@@ -63,8 +63,10 @@ initClouds();
     grabCursor: true,
     centeredSlides: false,
     slidesPerView: 3,
+    spaceBetween: 100,
     coverflowEffect: {
       slideShadows: false,
+      scale: 1,
       rotate: 0,
     },
   });
